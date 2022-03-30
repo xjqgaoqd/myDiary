@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/db_my_note?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    max-active: 8
+    timeout: 30000
+    min-idle: 0
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.demo.diary.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+

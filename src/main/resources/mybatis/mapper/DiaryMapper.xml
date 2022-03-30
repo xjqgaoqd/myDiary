@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.diary.mapper.DiaryMapper">
+    <sql id="BaseColumnList">
+        user_id,mood_id,write_date,keyword,site,is_lock,score
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.demo.diary.pojo.User">
+
+    </resultMap>
+
+    <select id="queryDiaryListByCondition" resultType="java.util.Map">
+        select d.id,d.user_id,write_date,d.status,
+            IF(is_lock = 1, "", d.score) AS score,
+            IF(is_lock = 1, "", mood_id) AS mood_id,
+            IF(is_lock = 1, "", keyword) AS keyword,
+            IF(is_lock = 1, "", site) AS site,
+            IF(is_lock = 1, "", d.remark) AS remark,
+            IF(is_lock = 1, "", m.name) AS mood_name,
+            IF(is_lock = 1, "", m.type) AS mood_type,
+            IF(is_lock = 1, "", dc.content) AS content
+        from tb_diary d
+        left join tb_mood m on d.mood_id=m.id
+        left join tb_diary_content dc on d.id=dc.diary_id
+        <where>
+            <trim>
+                write_date BETWEEN #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+                <if test="id != null and id != ''">
+                    and d.id = #{id,jdbcType=VARCHAR}
+                </if>
+                <if test="userId != null and userId != ''">
+                    and user_id = #{userId,jdbcType=VARCHAR}
+                </if>
+                <if test="moodId != null and moodId != ''">
+                    and mood_id = #{moodId,jdbcType=VARCHAR}
+                </if>
+                <if test="keyword != null and keyword != ''">
+                    and keyword like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="site != null and site != ''">
+                    and site like CONCAT('%',#{site,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="writeDate != null and writeDate != ''">
+                    and write_date like CONCAT('%',#{writeDate},'%')
+                </if>
+                <if test="remark != null and remark != ''">
+                    and d.remark = #{remark,jdbcType=VARCHAR}
+                </if>
+                <if test="isLock != null ">
+                    and is_lock = #{isLock,jdbcType=INTEGER}
+                </if>
+                <if test="status != null ">
+                    and d.status = #{status,jdbcType=INTEGER}
+                </if>
+                <if test="score != null ">
+                    and score = #{score,jdbcType=INTEGER}
+                </if>
+            </trim>
+        </where>
+        ORDER BY write_date
+    </select>
+</mapper>
