@@ -58,7 +58,12 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
             diary.setMoodId(map.containsKey("moodId") && !StringUtil.isEmpty(map.get("moodId")) ? String.valueOf(map.get("moodId")) : "01");
             diary.setStatus(0);
             diary.setSite(map.containsKey("site") && !StringUtil.isEmpty(map.get("site")) ? String.valueOf(map.get("site")) : "");
-            diary.setId(UUID.randomUUID().toString());
+            if (!map.containsKey("id") || StringUtil.isEmpty(map.get("id"))){
+                diary.setId(UUID.randomUUID().toString());
+            }else {
+                diary.setId(map.get("id").toString());
+            }
+
             diary.setScore(map.containsKey("score") && !StringUtil.isEmpty(map.get("score")) ? Integer.parseInt(map.get("score").toString()) : 1);
 
             Integer insetDiary = getBaseMapper().insert(diary);

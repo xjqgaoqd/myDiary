@@ -36,6 +36,7 @@ public class UserController {
     }
 
 
+    //Redis test
     @PostMapping(value = "/hello1")
     public String hello(@RequestParam (value = "id") String id){
         //查询缓存中是否存在
