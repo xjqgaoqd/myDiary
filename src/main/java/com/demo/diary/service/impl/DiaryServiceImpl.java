@@ -40,7 +40,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
     private LocalFileMapper localFileMapper;
 
     @Override
-    public void addDiary(Map<String,Object> map) throws Exception {
+    public String addDiary(Map<String,Object> map) throws Exception {
         try {
             Diary diary = new Diary();
             if (StringUtil.isEmpty(map.get("writeDate"))){
@@ -49,7 +49,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
             diary.setWriteDate(ft.parse(map.get("writeDate").toString()));
             if (StringUtil.isEmpty(map.get("userId"))){
-                return;
+                return "";
             }
             diary.setUserId(map.get("userId").toString());
             diary.setIsLock(0);
@@ -58,10 +58,10 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
             diary.setMoodId(map.containsKey("moodId") && !StringUtil.isEmpty(map.get("moodId")) ? String.valueOf(map.get("moodId")) : "01");
             diary.setStatus(0);
             diary.setSite(map.containsKey("site") && !StringUtil.isEmpty(map.get("site")) ? String.valueOf(map.get("site")) : "");
-            if (!map.containsKey("id") || StringUtil.isEmpty(map.get("id"))){
-                diary.setId(UUID.randomUUID().toString());
-            }else {
+            if (map.containsKey("id") && !StringUtil.isEmpty(map.get("id"))){
                 diary.setId(map.get("id").toString());
+            }else {
+                diary.setId(UUID.randomUUID().toString());
             }
 
             diary.setScore(map.containsKey("score") && !StringUtil.isEmpty(map.get("score")) ? Integer.parseInt(map.get("score").toString()) : 1);
@@ -73,6 +73,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
                 diaryContent.setContent(String.valueOf(map.get("content")));
                 diaryContentMapper.insert(diaryContent);
             }
+            return diary.getId();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

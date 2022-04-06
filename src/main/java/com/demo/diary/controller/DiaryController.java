@@ -30,8 +30,8 @@ public class DiaryController {
     @PostMapping("/addDiary")
     public WrappedResult addDiary(@RequestBody Map<String, Object> diaryMap){
         try {
-            diaryService.addDiary(diaryMap);
-            return WrappedResult.successWrapedResult("服务调用成功");
+            String diaryId = diaryService.addDiary(diaryMap);
+            return WrappedResult.successWrapedResult(diaryId);
         }catch (Exception e){
             return WrappedResult.failedWrappedResult("新增日记失败");
         }

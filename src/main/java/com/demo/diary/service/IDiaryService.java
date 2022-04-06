@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IDiaryService extends IService<Diary> {
-    void addDiary(Map<String,Object> map) throws Exception;
+    String addDiary(Map<String,Object> map) throws Exception;
 
     WrappedResult queryDiaryByCondition(ParameterCondition<Diary> param) throws Exception;
 

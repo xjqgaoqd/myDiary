@@ -51,4 +51,7 @@ public class Diary implements Serializable {
 
     @TableField(exist = false)
     private String endTime;
+
+    @TableField(exist = false)
+    private String writeDateParm;
 }

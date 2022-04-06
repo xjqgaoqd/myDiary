@@ -41,9 +41,6 @@
                 <if test="site != null and site != ''">
                     and site like CONCAT('%',#{site,jdbcType=VARCHAR},'%')
                 </if>
-                <if test="writeDate != null and writeDate != ''">
-                    and write_date like CONCAT('%',#{writeDate},'%')
-                </if>
                 <if test="remark != null and remark != ''">
                     and d.remark = #{remark,jdbcType=VARCHAR}
                 </if>
@@ -55,6 +52,9 @@
                 </if>
                 <if test="score != null ">
                     and score = #{score,jdbcType=INTEGER}
+                </if>
+                <if test="writeDateParm != null and writeDateParm != ''">
+                    and write_date like CONCAT(#{writeDateParm,jdbcType=VARCHAR},'%')
                 </if>
             </trim>
         </where>
