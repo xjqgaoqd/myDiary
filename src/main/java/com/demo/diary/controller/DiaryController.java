@@ -6,6 +6,8 @@ import com.demo.diary.common.util.StringUtil;
 import com.demo.diary.common.vo.WrappedResult;
 import com.demo.diary.pojo.Diary;
 import com.demo.diary.service.IDiaryService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,14 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @RestController
 @RequestMapping("/diary")
 @CrossOrigin
+@Api(tags = "日记相关接口")
 public class DiaryController {
 
     public static final Logger log = LoggerFactory.getLogger(DiaryController.class);
     @Autowired
     private IDiaryService diaryService;
 
+    @ApiOperation("新增日记接口")
     @PostMapping("/addDiary")
     public WrappedResult addDiary(@RequestBody Map<String, Object> diaryMap){
         try {
@@ -37,6 +41,7 @@ public class DiaryController {
         }
     }
 
+    @ApiOperation("根据条件查询")
     @PostMapping("/queryDiaryByCondition")
     public WrappedResult queryDiaryByCondition(@RequestBody ParameterCondition<Diary> parameterCondition){
         try {
@@ -46,6 +51,7 @@ public class DiaryController {
         }
     }
 
+    @ApiOperation("根据id删除")
     @PostMapping("/deleteDiaryByids")
     public WrappedResult deleteDiaryByids(@RequestBody List<String> ids){
         try {
@@ -56,6 +62,7 @@ public class DiaryController {
         }
     }
 
+    @ApiOperation("更新日记")
     @PostMapping("/updateDiaryById")
     public WrappedResult updateDiaryById(@RequestBody Map<String, Object> updateMap){
         try {
@@ -69,6 +76,7 @@ public class DiaryController {
         }
     }
 
+    @ApiOperation("按模板导出日记")
     @GetMapping("/exportDiary")
     public void exportDiary(@RequestParam("diary_id") String diaryId , HttpServletRequest request, HttpServletResponse response){
         try {
