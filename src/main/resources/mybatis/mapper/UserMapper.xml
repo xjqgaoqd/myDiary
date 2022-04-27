@@ -25,14 +25,14 @@
                 <if test="id != null and id != ''">
                     and id = #{id,jdbcType=VARCHAR}
                 </if>
-                <if test="type != null and type != ''">
+                <if test="type != null">
                     and type = #{type,jdbcType=INTEGER}
                 </if>
-                <if test="status != null and status != ''">
-                    and status = #{type,jdbcType=INTEGER}
+                <if test="status != null">
+                    and status = #{status,jdbcType=INTEGER}
                 </if>
                 <if test="password != null and password != ''">
-                    and password = #{username,jdbcType=VARCHAR}
+                    and password = #{password,jdbcType=VARCHAR}
                 </if>
             </trim>
         </where>

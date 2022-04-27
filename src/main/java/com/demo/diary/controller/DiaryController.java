@@ -23,7 +23,7 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @RestController
 @RequestMapping("/diary")
 @CrossOrigin
-@Api(tags = "日记相关接口")
+@Api(tags = "日记接口")
 public class DiaryController {
 
     public static final Logger log = LoggerFactory.getLogger(DiaryController.class);

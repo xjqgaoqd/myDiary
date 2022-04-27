@@ -21,7 +21,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     /** 用户类型 0、管理员 1、普通用户 */
-    private Integer type = 1;
+    private Integer type;
     /** 用户的状态 1、正常 0、删除 */
     private Integer status;
 }

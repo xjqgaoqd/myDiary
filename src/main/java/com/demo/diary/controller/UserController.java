@@ -5,6 +5,8 @@ import com.demo.diary.common.util.RedisUtils;
 import com.demo.diary.common.vo.WrappedResult;
 import com.demo.diary.pojo.User;
 import com.demo.diary.service.IUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
+@Api(tags = "用户接口")
 public class UserController {
     public static final Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -26,6 +29,7 @@ public class UserController {
     @Autowired
     private RedisUtils redisUtils;
 
+    @ApiOperation("获取用户列表")
     @RequestMapping(path = "/getUserList",method = RequestMethod.POST)
     public WrappedResult getUsers(@RequestBody ParameterCondition<User> parameterCondition){
         try {
@@ -38,6 +42,7 @@ public class UserController {
 
     //Redis test
     @PostMapping(value = "/hello1")
+    @ApiOperation(value = "redis测试",notes = "redis存的id")
     public String hello(@RequestParam (value = "id") String id){
         //查询缓存中是否存在
         boolean hasKey = redisUtils.exists(id);
