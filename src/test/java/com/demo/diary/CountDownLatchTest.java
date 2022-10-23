@@ -31,6 +31,6 @@ public class CountDownLatchTest {
         System.out.println("\n游戏开始");
         executorService.shutdown();
 
-        //在没有返回结果时用这个比较方便，否则用future
+        //在没有返回结果时用这个比较方便，否则用future、
     }
 }
