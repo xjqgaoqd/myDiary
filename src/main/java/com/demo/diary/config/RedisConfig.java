@@ -60,14 +60,14 @@ public class RedisConfig extends CachingConfigurerSupport{
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(host);
-        factory.setPort(port);
-        factory.setTimeout(timeout); //设置连接超时时间
-        factory.setPassword(password);
-        factory.getPoolConfig().setMaxIdle(maxIdle);
-        factory.getPoolConfig().setMinIdle(minIdle);
-        factory.getPoolConfig().setMaxTotal(maxActive);
-        factory.getPoolConfig().setMaxWaitMillis(maxWait);
+//        factory.setHostName(host);
+//        factory.setPort(port);
+//        factory.setTimeout(timeout); //设置连接超时时间
+//        factory.setPassword(password);
+//        factory.getPoolConfig().setMaxIdle(maxIdle);
+//        factory.getPoolConfig().setMinIdle(minIdle);
+//        factory.getPoolConfig().setMaxTotal(maxActive);
+//        factory.getPoolConfig().setMaxWaitMillis(maxWait);
         return factory;
     }
 
